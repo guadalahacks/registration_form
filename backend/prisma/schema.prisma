@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model RegistrationForm {
+  id                          Int      @id @default(autoincrement())
+  firstName                   String
+  lastName                    String
+  age                         Int
+  phoneNumber                 String
+  email                       String
+  password                    String
+  countryOfResidence          String
+  school                      String
+  major                       String
+  classification              String
+  anticipatedGraduationYear   Int
+  currentLevelOfStudy         String
+  gender                      String
+  hackathonsAttended          Int
+  technicalSkills             String[]
+  dietaryRestrictions         String[]
+  hasTeam                     Boolean
+  heardAboutGuadalahacks      String
+  shirtSize                   String
+  resume                      String
+  additionalLinks             String?
+  specialAccommodations       String?
+  followUpForAccessibility    Boolean
+  emergencyContactName        String
+  emergencyContactRelationship String
+  emergencyContactPhoneNumber String
+  emergencyContactEmail       String
+  additionalInfo              String?
+
+  @@map("registration_form")
+}
