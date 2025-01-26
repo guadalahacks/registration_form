@@ -2,7 +2,8 @@ import { stringLocalization, elementLocalization } from "./localization"
 import { ReactElement } from 'react'
 import StatePool from 'state-pool'
 
-const defaultLanguage: string = "es"
+const availableLanguages: string[] = ["es", "en"]
+const defaultLanguage: string = availableLanguages.includes(navigator.language.split('-')[0]) ? navigator.language.split('-')[0] : "en"
 
 export const languageState = StatePool.createState(defaultLanguage)
 

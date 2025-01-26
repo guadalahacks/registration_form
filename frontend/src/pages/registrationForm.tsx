@@ -3,10 +3,11 @@
 import { useState } from "react"
 import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import { getLocalizedElement, languageState } from '../app/locale';
+import { getLocalizedString, languageState } from '../app/locale';
 
 export default function RegistrationForm() {
   const [step, setStep] = useState(1)
+  const [language, _] = languageState.useState();
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     firstName: "",
@@ -77,7 +78,7 @@ export default function RegistrationForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!formData.agreeToPolicy) {
-      alert("Please agree to the data policy before submitting")
+      alert(getLocalizedString("policyAgreementError", language))
       return
     }
     setIsSubmitting(true)
@@ -152,10 +153,10 @@ export default function RegistrationForm() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              Guadalahacks Registration
+              {getLocalizedString("registrationFormTitle", language)}
             </motion.h1>
             <div className="flex justify-center items-center gap-2 text-sm text-gray-500">
-              <span>Step {step}</span>
+              <span>{getLocalizedString("step", language)} {step}</span>
               <div className="h-2 w-48 bg-gray-200 rounded-full overflow-hidden">
                 <motion.div
                   className="h-full bg-gradient-to-r from-[#E31C79] to-[#FF7B5F]"
@@ -175,7 +176,7 @@ export default function RegistrationForm() {
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700">First Name</label>
+                        <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepOneFirstName", language)}</label>
                         <input
                           type="text"
                           name="firstName"
@@ -186,7 +187,7 @@ export default function RegistrationForm() {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700">Last Name</label>
+                        <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepOneLastName", language)}</label>
                         <input
                           type="text"
                           name="lastName"
@@ -199,7 +200,7 @@ export default function RegistrationForm() {
                     </div>
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700">Age</label>
+                        <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepOneAge", language)}</label>
                         <input
                           type="number"
                           name="age"
@@ -210,7 +211,7 @@ export default function RegistrationForm() {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700">Phone Number</label>
+                        <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepOnePhoneNumber", language)}</label>
                         <input
                           type="tel"
                           name="phone"
@@ -222,7 +223,7 @@ export default function RegistrationForm() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Country of Residence</label>
+                      <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepOneCountry", language)}</label>
                       <input
                         type="text"
                         name="countryOfResidence"
@@ -233,7 +234,7 @@ export default function RegistrationForm() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Email</label>
+                      <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepOneEmail", language)}</label>
                       <input
                         type="email"
                         name="email"
@@ -244,12 +245,12 @@ export default function RegistrationForm() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Password</label>
+                      <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepOnePassword", language)}</label>
                       <input
                         type="password"
                         name="password"
                         value={formData.password}
-                        placeholder="Password must be 8 characters or longer"
+                        placeholder={getLocalizedString("stepOnePasswordPlaceholder", language)}
                         onChange={handleInputChange}
                         className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-[#E31C79] focus:outline-none focus:ring-1 focus:ring-[#E31C79]"
                         required
@@ -261,7 +262,7 @@ export default function RegistrationForm() {
                 {step === 2 && (
                   <div className="space-y-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">School</label>
+                      <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepTwoSchool", language)}</label>
                       <input
                         type="text"
                         name="school"
@@ -272,7 +273,7 @@ export default function RegistrationForm() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Major</label>
+                      <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepTwoMajor", language)}</label>
                       <input
                         type="text"
                         name="major"
@@ -284,7 +285,7 @@ export default function RegistrationForm() {
                     </div>
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700">Classification</label>
+                        <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepTwoClassification", language)}</label>
                         <select
                           name="classification"
                           value={formData.classification}
@@ -292,22 +293,22 @@ export default function RegistrationForm() {
                           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-[#E31C79] focus:outline-none focus:ring-1 focus:ring-[#E31C79]"
                           required
                         >
-                          <option value="">Select...</option>
-                          <option value="Freshman">Freshman</option>
-                          <option value="Sophomore">Sophomore</option>
-                          <option value="Junior">Junior</option>
-                          <option value="Senior">Senior</option>
-                          <option value="Graduate">Graduate</option>
+                          <option value="">{getLocalizedString("stepTwoClassificationSelect", language)}</option>
+                          <option value="Freshman">{getLocalizedString("stepTwoClassificationFreshman", language)}</option>
+                          <option value="Sophomore">{getLocalizedString("stepTwoClassificationSophomore", language)}</option>
+                          <option value="Junior">{getLocalizedString("stepTwoClassificationJunior", language)}</option>
+                          <option value="Senior">{getLocalizedString("stepTwoClassificationSenior", language)}</option>
+                          <option value="Graduate">{getLocalizedString("stepTwoClassificationGraduate", language)}</option>
                         </select>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700">Graduation Year</label>
+                        <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepTwoGraduationYear", language)}</label>
                         <input
                           type="number"
                           name="anticipatedGraduationYear"
                           value={formData.anticipatedGraduationYear}
                           onChange={handleInputChange}
-                          min={2024}
+                          min={2020}
                           max={2030}
                           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-[#E31C79] focus:outline-none focus:ring-1 focus:ring-[#E31C79]"
                           required
@@ -320,7 +321,7 @@ export default function RegistrationForm() {
                 {step === 3 && (
                   <div className="space-y-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Technical Skills</label>
+                      <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepThreeTechnicalSkills", language)}</label>
                       <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
                         {[
                           "Python",
@@ -415,7 +416,7 @@ export default function RegistrationForm() {
                 {step === 4 && (
                   <div className="space-y-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Dietary Restrictions</label>
+                      <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepFourDietaryRestrictions", language)}</label>
                       <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
                         {[
                           "Vegan",
@@ -443,7 +444,7 @@ export default function RegistrationForm() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Resume (PDF only)</label>
+                      <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepFourResume", language)}</label>
                       <input
                         type="file"
                         name="resume"
@@ -452,11 +453,11 @@ export default function RegistrationForm() {
                         className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#E31C79] file:text-white hover:file:bg-pink-600"
                       />
                       <p className="mt-1 text-sm text-gray-500">
-                        Companies will use this resume to offer interviews for internships and full-time positions.
+                      {getLocalizedString("stepFourResumeDescription", language)}
                       </p>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Portfolio Links</label>
+                      <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepFourPortfolioLinks", language)}</label>
                       <input
                         type="text"
                         name="additionalLinks"
@@ -472,13 +473,13 @@ export default function RegistrationForm() {
                 {step === 5 && (
                   <div className="space-y-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Emergency Contact Information</label>
+                      <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepFiveEmergencyContact", language)}</label>
                       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <motion.input
                           {...fadeInUp}
                           transition={{ delay: 0.1 }}
                           type="text"
-                          name="emergencyContactName"
+                          name={getLocalizedString("stepFiveEmergencyContactName", language)}
                           value={formData.emergencyContactName}
                           onChange={handleInputChange}
                           placeholder="Contact Name"
@@ -489,7 +490,7 @@ export default function RegistrationForm() {
                           {...fadeInUp}
                           transition={{ delay: 0.2 }}
                           type="text"
-                          name="emergencyContactRelationship"
+                          name={getLocalizedString("stepFiveEmergencyContactRelationship", language)}
                           value={formData.emergencyContactRelationship}
                           onChange={handleInputChange}
                           placeholder="Relationship"
@@ -500,7 +501,7 @@ export default function RegistrationForm() {
                           {...fadeInUp}
                           transition={{ delay: 0.3 }}
                           type="tel"
-                          name="emergencyContactPhoneNumber"
+                          name={getLocalizedString("stepFiveEmergencyContactPhoneNumber", language)}
                           value={formData.emergencyContactPhoneNumber}
                           onChange={handleInputChange}
                           placeholder="Phone Number"
@@ -511,7 +512,7 @@ export default function RegistrationForm() {
                           {...fadeInUp}
                           transition={{ delay: 0.4 }}
                           type="email"
-                          name="emergencyContactEmail"
+                          name={getLocalizedString("stepFiveEmergencyContactEmail", language)}
                           value={formData.emergencyContactEmail}
                           onChange={handleInputChange}
                           placeholder="Email"
@@ -522,7 +523,7 @@ export default function RegistrationForm() {
                     </div>
 
                     <motion.div {...fadeInUp} transition={{ delay: 0.5 }}>
-                      <label className="block text-sm font-medium text-gray-700">Additional Information</label>
+                      <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepFiveAdditionalInformation", language)}</label>
                       <textarea
                         name="additionalInfo"
                         value={formData.additionalInfo}
@@ -572,7 +573,7 @@ export default function RegistrationForm() {
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-gray-100 transition-all duration-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50 hover:shadow-md"
               >
                 <ChevronLeft className="h-4 w-4 mr-2" />
-                Previous
+                {getLocalizedString("backButton", language)}
               </button>
               <button
                 type={step === totalSteps ? "submit" : "button"}
@@ -583,13 +584,13 @@ export default function RegistrationForm() {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Submitting...
+                    {getLocalizedString("submittingButton", language)}
                   </>
                 ) : step === totalSteps ? (
-                  "Submit"
+                  getLocalizedString('submitButton', language)
                 ) : (
                   <>
-                    Next
+                    {getLocalizedString("nextButton", language)}
                     <ChevronRight className="h-4 w-4 ml-2" />
                   </>
                 )}
