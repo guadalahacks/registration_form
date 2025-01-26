@@ -2,9 +2,12 @@ const { PrismaClient } = require('@prisma/client');
 const express = require('express');
 const bodyParser = require('body-parser');
 const { body, validationResult } = require('express-validator');
+const cors = require('cors');
 
 const prisma = new PrismaClient();
 const app = express();
+
+app.use(cors());
 app.use(bodyParser.json());
 
 // Error handling middleware

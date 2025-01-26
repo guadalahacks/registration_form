@@ -12,7 +12,7 @@ export default function RegistrationForm() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    age: "",
+    age: 0,
     phoneNumber: "",
     email: "",
     password: "",
@@ -20,15 +20,15 @@ export default function RegistrationForm() {
     school: "",
     major: "",
     classification: "",
-    anticipatedGraduationYear: "",
-    currentLevelOfStudy: "", // Add this to the form (Review)
-    gender: "",
-    hackathonsAttended: "",
+    anticipatedGraduationYear: 0,
+    currentLevelOfStudy: "none", // Add this to the form (Review)
+    gender: "none", // Add this to the form
+    hackathonsAttended: 0,
     technicalSkills: [] as string[],
     dietaryRestrictions: [] as string[],
     hasTeam: false, // Add this to the form
-    heardAboutGuadalahacks: "",  // Add this to the form
-    shirtSize: "", // Add this only if we have money for shirts :c
+    heardAboutGuadalahacks: "none",  // Add this to the form
+    shirtSize: "none", // Add this only if we have money for shirts :c
     resume: null,
     additionalLinks: "",
     specialAccommodations: "", // Add this to the form
@@ -81,6 +81,7 @@ export default function RegistrationForm() {
       alert(getLocalizedString("policyAgreementError", language))
       return
     }
+    console.log(JSON.stringify(formData))
     setIsSubmitting(true)
   
     try {
@@ -199,22 +200,22 @@ export default function RegistrationForm() {
                       </div>
                     </div>
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                      <div>
+                        <div>
                         <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepOneAge", language)}</label>
                         <input
                           type="number"
                           name="age"
                           value={formData.age}
-                          onChange={handleInputChange}
+                          onChange={(e) => setFormData((prev) => ({ ...prev, age: parseInt(e.target.value, 10) }))}
                           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-[#E31C79] focus:outline-none focus:ring-1 focus:ring-[#E31C79]"
                           required
                         />
-                      </div>
+                        </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepOnePhoneNumber", language)}</label>
                         <input
                           type="tel"
-                          name="phone"
+                          name="phoneNumber"
                           value={formData.phoneNumber}
                           onChange={handleInputChange}
                           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-[#E31C79] focus:outline-none focus:ring-1 focus:ring-[#E31C79]"
@@ -301,19 +302,19 @@ export default function RegistrationForm() {
                           <option value="Graduate">{getLocalizedString("stepTwoClassificationGraduate", language)}</option>
                         </select>
                       </div>
-                      <div>
+                        <div>
                         <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepTwoGraduationYear", language)}</label>
                         <input
                           type="number"
                           name="anticipatedGraduationYear"
                           value={formData.anticipatedGraduationYear}
-                          onChange={handleInputChange}
+                          onChange={(e) => setFormData((prev) => ({ ...prev, anticipatedGraduationYear: parseInt(e.target.value, 10) }))}
                           min={2020}
                           max={2030}
                           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-[#E31C79] focus:outline-none focus:ring-1 focus:ring-[#E31C79]"
                           required
                         />
-                      </div>
+                        </div>
                     </div>
                   </div>
                 )}
@@ -479,10 +480,10 @@ export default function RegistrationForm() {
                           {...fadeInUp}
                           transition={{ delay: 0.1 }}
                           type="text"
-                          name={getLocalizedString("stepFiveEmergencyContactName", language)}
+                          name="emergencyContactName"
                           value={formData.emergencyContactName}
                           onChange={handleInputChange}
-                          placeholder="Contact Name"
+                          placeholder={getLocalizedString("stepFiveEmergencyContactName", language)}
                           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 transition-all duration-300 focus:border-[#E31C79] focus:outline-none focus:ring-2 focus:ring-[#E31C79]/50 hover:border-pink-300"
                           required
                         />
@@ -490,10 +491,10 @@ export default function RegistrationForm() {
                           {...fadeInUp}
                           transition={{ delay: 0.2 }}
                           type="text"
-                          name={getLocalizedString("stepFiveEmergencyContactRelationship", language)}
+                          name="emergencyContactRelationship"
                           value={formData.emergencyContactRelationship}
                           onChange={handleInputChange}
-                          placeholder="Relationship"
+                          placeholder={getLocalizedString("stepFiveEmergencyContactRelationship", language)}
                           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 transition-all duration-300 focus:border-[#E31C79] focus:outline-none focus:ring-2 focus:ring-[#E31C79]/50 hover:border-pink-300"
                           required
                         />
@@ -501,10 +502,10 @@ export default function RegistrationForm() {
                           {...fadeInUp}
                           transition={{ delay: 0.3 }}
                           type="tel"
-                          name={getLocalizedString("stepFiveEmergencyContactPhoneNumber", language)}
+                          name="emergencyContactPhoneNumber"
                           value={formData.emergencyContactPhoneNumber}
                           onChange={handleInputChange}
-                          placeholder="Phone Number"
+                          placeholder={getLocalizedString("stepFiveEmergencyContactPhoneNumber", language)}
                           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 transition-all duration-300 focus:border-[#E31C79] focus:outline-none focus:ring-2 focus:ring-[#E31C79]/50 hover:border-pink-300"
                           required
                         />
@@ -512,10 +513,10 @@ export default function RegistrationForm() {
                           {...fadeInUp}
                           transition={{ delay: 0.4 }}
                           type="email"
-                          name={getLocalizedString("stepFiveEmergencyContactEmail", language)}
+                          name="emergencyContactEmail"
                           value={formData.emergencyContactEmail}
                           onChange={handleInputChange}
-                          placeholder="Email"
+                          placeholder={getLocalizedString("stepFiveEmergencyContactEmail", language)}
                           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 transition-all duration-300 focus:border-[#E31C79] focus:outline-none focus:ring-2 focus:ring-[#E31C79]/50 hover:border-pink-300"
                           required
                         />
