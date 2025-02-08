@@ -7,7 +7,12 @@ const cors = require('cors');
 const prisma = new PrismaClient();
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+app.options('*', cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 
 // Error handling middleware
