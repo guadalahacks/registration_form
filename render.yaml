@@ -1,10 +1,35 @@
 services:
-  - name: registration-form
+  backend:
     type: web
-    env: docker
-    repo: https://github.com/guadalahacks/registration_form
-    branch: main 
-    plan: free
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
     envVars:
-      - key: PORT
-        value: 80
+      DATABASE_URL: ${DATABASE_URL}
+    plan: free
+    healthCheckPath: /health
+    autoDeploy: true
+    build:
+      dockerfilePath: ./backend/Dockerfile
+    serviceDetails:
+      ports:
+        - port: 3000
+  frontend:
+    type: web
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run preview
+    plan: free
+    healthCheckPath: /
+    autoDeploy: true
+    build:
+      dockerfilePath: ./frontend/Dockerfile
+    serviceDetails:
+      ports:
+        - port: 5173
+databases:
+  - name: registros
+    plan: free
+    databaseType: postgresql
+    envVars:
+      DATABASE_URL: ${DATABASE_URL}
