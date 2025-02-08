@@ -47,7 +47,7 @@ export default function RegistrationForm() {
     const { name, value, type } = e.target
     if (type === "checkbox") {
       const checkbox = e.target as HTMLInputElement
-      const skillsArray = [...(formData[name] as string[])]
+      const skillsArray = [...(formData[name as keyof typeof formData] as string[])];
       if (checkbox.checked) {
         skillsArray.push(value)
       } else {
