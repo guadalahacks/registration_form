@@ -83,15 +83,10 @@ export default function RegistrationForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!agreeToPolicy) {
-      alert(getLocalizedString("policyAgreementError", language))
-      return
-    }
-    console.log(JSON.stringify(formData))
     setIsSubmitting(true)
-  
     try {
-      const response = await fetch('http://localhost:3000/registration', {
+      const apiUrl = import.meta.env.API_URL || 'http://localhost:3000';
+      const response = await fetch(`${apiUrl}/registration`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -103,8 +98,9 @@ export default function RegistrationForm() {
         throw new Error('Network response was not ok')
       }
   
-      const result = await response.json()
+      await response.json()
       alert("Form submitted successfully!")
+      window.location.href = "https://guadalahacks.com/";
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error)
       alert("There was an error submitting the form")

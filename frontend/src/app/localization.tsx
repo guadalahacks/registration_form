@@ -180,12 +180,6 @@ export const stringLocalization: StringLocalization = {
         es: "Paso",
         en: "Step"
     },
-
-    policyAgreementError: {
-        es: "Por favor recuerda aceptar la política de datos antes de enviar",
-        en: "Please remember to agree to the data policy before submitting"
-    },
-
 }
 
 export const elementLocalization: ElementLocalization = {
