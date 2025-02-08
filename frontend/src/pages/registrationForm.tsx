@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { getLocalizedString, languageState } from '../app/locale';
@@ -118,29 +118,31 @@ export default function RegistrationForm() {
   return (
     <div className="min-h-screen bg-gradient-to-r from-[#E31C79] to-[#FF7B5F] py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Animated background circles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-32 h-32 bg-white/10 rounded-full"
-            animate={{
-              x: [Math.random() * 100, Math.random() * 100],
-              y: [Math.random() * 100, Math.random() * 100],
-              scale: [1, 1.2, 1],
-              rotate: [0, 360],
-            }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "linear",
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
-      </div>
+      {useMemo(() => (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-32 h-32 bg-white/10 rounded-full"
+              animate={{
+                x: [Math.random() * 100, Math.random() * 100],
+                y: [Math.random() * 100, Math.random() * 100],
+                scale: [1, 1.2, 1],
+                rotate: [0, 360],
+              }}
+              transition={{
+                duration: Math.random() * 10 + 10,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "linear",
+              }}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+            />
+          ))}
+        </div>
+      ), [])}
 
       <motion.div
         className="max-w-3xl mx-auto"
