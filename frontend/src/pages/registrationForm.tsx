@@ -9,6 +9,7 @@ export default function RegistrationForm() {
   const [step, setStep] = useState(1)
   const [language, _] = languageState.useState();
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [agreeToPolicy, setAgreeToPolicy] = useState(false)
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -29,7 +30,7 @@ export default function RegistrationForm() {
     hasTeam: false, // Add this to the form
     heardAboutGuadalahacks: "none",  // Add this to the form
     shirtSize: "none", // Add this only if we have money for shirts :c
-    resume: null,
+    resume: "",
     additionalLinks: "",
     specialAccommodations: "", // Add this to the form
     followUpForAccessibility: false, // Add this to the form
@@ -38,7 +39,6 @@ export default function RegistrationForm() {
     emergencyContactPhoneNumber: "",
     emergencyContactEmail: "",
     additionalInfo: "",
-    agreeToPolicy: false,
   })
 
   const totalSteps = 5
@@ -47,37 +47,43 @@ export default function RegistrationForm() {
     const { name, value, type } = e.target
     if (type === "checkbox") {
       const checkbox = e.target as HTMLInputElement
-      if (name === "agreeToPolicy") {
-        setFormData((prev) => ({ ...prev, [name]: checkbox.checked }))
+      const skillsArray = [...(formData[name] as string[])]
+      if (checkbox.checked) {
+        skillsArray.push(value)
       } else {
-        const skillsArray = [...(formData[name] as string[])]
-        if (checkbox.checked) {
-          skillsArray.push(value)
-        } else {
-          const index = skillsArray.indexOf(value)
-          if (index > -1) {
-            skillsArray.splice(index, 1)
-          }
+        const index = skillsArray.indexOf(value)
+        if (index > -1) {
+          skillsArray.splice(index, 1)
         }
-        setFormData((prev) => ({ ...prev, [name]: skillsArray }))
       }
+      setFormData((prev) => ({ ...prev, [name]: skillsArray }))
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }))
     }
   }
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) {
-      setFormData((prev) => ({ ...prev, resume: e.target.files?.[0] }))
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file && file.type === "application/pdf") {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setFormData((prev) => ({ ...prev, resume: reader.result as string }))
+      };
+      reader.onerror = (error) => {
+        console.error("Error reading file:", error);
+      };
+    } else {
+      alert("Please upload a valid PDF file.");
     }
-  }
+  };
 
   const nextStep = () => setStep((prev) => Math.min(prev + 1, totalSteps))
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1))
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!formData.agreeToPolicy) {
+    if (!agreeToPolicy) {
       alert(getLocalizedString("policyAgreementError", language))
       return
     }
@@ -540,8 +546,8 @@ export default function RegistrationForm() {
                         type="checkbox"
                         name="agreeToPolicy"
                         id="agreeToPolicy"
-                        checked={formData.agreeToPolicy}
-                        onChange={handleInputChange}
+                        checked={agreeToPolicy}
+                        onChange={(e) => setAgreeToPolicy(e.target.checked)}
                         className="mt-1 h-4 w-4 rounded border-gray-300 text-[#E31C79] transition-all duration-300 focus:ring-[#E31C79] hover:border-pink-300"
                         required
                       />
