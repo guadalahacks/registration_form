@@ -174,7 +174,7 @@ export default function RegistrationForm() {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={agreeToPolicy ? handleSubmit : (e) => { e.preventDefault(); nextStep(); }} className="space-y-6">
             <AnimatePresence mode="wait">
               <motion.div key={step} {...fadeInUp} transition={{ duration: 0.3 }} className="space-y-6">
                 {step === 1 && (
