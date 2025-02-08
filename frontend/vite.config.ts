@@ -10,6 +10,6 @@ export default defineConfig({
       'guadalahacks.cristobalmedinameza.com',
       'registro.guadalahacks.com',
     ],
-    host: '0.0.0.0',
+  host: '0.0.0.0',
   }
 })
