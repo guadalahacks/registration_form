@@ -98,8 +98,8 @@ export default function RegistrationForm() {
       alert("Form submitted successfully!")
       window.location.href = "https://guadalahacks.com/";
     } catch (error) {
-      alert("Form submitted successfully!")
-      window.location.href = "https://guadalahacks.com/";
+      console.error('There was a problem with the fetch operation:', error)
+      alert(`There was an error submitting the form: ${error}`)
     } finally {
       setIsSubmitting(false)
     }
