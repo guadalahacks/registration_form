@@ -4,15 +4,9 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(),tailwindcss()],
   server: {
-    host: '0.0.0.0', 
-    allowedHosts: ['registro.guadalahacks.com'],  
-    hmr: {
-      protocol: 'wss',  
-      host: 'registro.guadalahacks.com', 
-      port: 443,  
-    },
-    https: true,  
+    allowedHosts: ['registro.guadalahacks.com'],
+  host: '0.0.0.0',
   }
 })
