@@ -6,13 +6,13 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
-    host: '0.0.0.0',  // Asegura que el servidor escuche en todas las interfaces
-    allowedHosts: ['registro.guadalahacks.com'],  // Permite el acceso solo desde tu dominio
+    host: '0.0.0.0', 
+    allowedHosts: ['registro.guadalahacks.com'],  
     hmr: {
-      protocol: 'wss',  // Usa WebSocket seguro
-      host: 'registro.guadalahacks.com',  // El dominio de tu servidor
-      port: 443,  // Usar el puerto 443 para HTTPS
+      protocol: 'wss',  
+      host: 'registro.guadalahacks.com', 
+      port: 443,  
     },
-    https: true,  // Asegúrate de que Vite esté ejecutándose sobre HTTPS
+    https: true,  
   }
 })
