@@ -57,7 +57,7 @@ const validateRegistration = [
 ];
 
 // Create a new registration form entry
-app.post('/registration', validateRegistration, async (req, res, next) => {
+app.post('/api/registration', validateRegistration, async (req, res, next) => {
     const data = req.body;
     try {
         const newRegistration = await prisma.registrationForm.create({
@@ -70,7 +70,7 @@ app.post('/registration', validateRegistration, async (req, res, next) => {
 });
 
 // Read all registration form entries
-app.get('/registrations', async (req, res, next) => {
+app.get('/api/registrations', async (req, res, next) => {
     try {
         const registrations = await prisma.registrationForm.findMany();
         res.status(200).json(registrations);
@@ -80,7 +80,7 @@ app.get('/registrations', async (req, res, next) => {
 });
 
 // Read a single registration form entry by ID
-app.get('/registration/:id', async (req, res, next) => {
+app.get('/api/registration/:id', async (req, res, next) => {
     const { id } = req.params;
     try {
         const registration = await prisma.registrationForm.findUnique({
@@ -97,7 +97,7 @@ app.get('/registration/:id', async (req, res, next) => {
 });
 
 // Update a registration form entry by ID
-app.put('/registration/:id', validateRegistration, async (req, res, next) => {
+app.put('/api/registration/:id', validateRegistration, async (req, res, next) => {
     const { id } = req.params;
     const data = req.body;
     try {
@@ -112,7 +112,7 @@ app.put('/registration/:id', validateRegistration, async (req, res, next) => {
 });
 
 // Delete a registration form entry by ID
-app.delete('/registration/:id', async (req, res, next) => {
+app.delete('/api/registration/:id', async (req, res, next) => {
     const { id } = req.params;
     try {
         await prisma.registrationForm.delete({
@@ -127,4 +127,8 @@ app.delete('/registration/:id', async (req, res, next) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+});
+
+app.get('/api', (req, res) => {
+    res.send('api is running');
 });
