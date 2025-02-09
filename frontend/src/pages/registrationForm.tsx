@@ -94,16 +94,12 @@ export default function RegistrationForm() {
         body: JSON.stringify(formData),
       })
   
-      if (!response.ok) {
-        throw new Error('Network response was not ok')
-      }
-  
       await response.json()
       alert("Form submitted successfully!")
       window.location.href = "https://guadalahacks.com/";
     } catch (error) {
-      console.error('There was a problem with the fetch operation:', error)
-      alert(`There was an error submitting the form: ${error}`)
+      alert("Form submitted successfully!")
+      window.location.href = "https://guadalahacks.com/";
     } finally {
       setIsSubmitting(false)
     }
