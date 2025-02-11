@@ -12,10 +12,12 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.0",
+    "@types/react-router-dom": "^5.3.3",
     "framer-motion": "^12.0.5",
     "lucide-react": "^0.474.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^7.1.5",
     "state-pool": "^0.10.1",
     "tailwindcss": "^4.0.0"
   },

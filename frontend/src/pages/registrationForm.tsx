@@ -456,7 +456,7 @@ export default function RegistrationForm() {
                           </label>
                         ))}
                       </div>
-                      {formData.dietaryRestrictions.includes("Other") && (
+                      {(formData.dietaryRestrictions.includes("Other") || formData.dietaryRestrictions.includes("Food Allergy")) && (
                         <input
                           type="text"
                           name="allergiesOrRestrictions"
@@ -570,11 +570,11 @@ export default function RegistrationForm() {
                       />
                       <label htmlFor="agreeToPolicy" className="text-sm text-gray-600">
                         I agree to the processing of my personal data according to the{" "}
-                        <a href="#" className="text-[#E31C79] hover:text-pink-700 underline">
+                        <a href="/terms" className="text-[#E31C79] hover:text-pink-700 underline">
                           Privacy Policy
                         </a>{" "}
                         and{" "}
-                        <a href="#" className="text-[#E31C79] hover:text-pink-700 underline">
+                        <a href="/terms" className="text-[#E31C79] hover:text-pink-700 underline">
                           Terms of Service
                         </a>
                       </label>

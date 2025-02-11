@@ -1,4 +1,3 @@
-import { s } from 'framer-motion/client';
 import { StringLocalization, ElementLocalization } from './locale';
 
 export const stringLocalization: StringLocalization = {
@@ -108,8 +107,8 @@ export const stringLocalization: StringLocalization = {
     },
 
     stepThreeTechnicalSkills: {
-        es: "Habilidades técnicas",
-        en: "Technical skills"
+        es: "Habilidades técnicas (Seleccione al menos una)",
+        en: "Technical skills (Select at least one)"
     },
 
     stepFourDietaryRestrictions: {
