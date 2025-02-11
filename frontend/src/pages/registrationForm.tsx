@@ -17,16 +17,18 @@ export default function RegistrationForm() {
     phoneNumber: "",
     email: "",
     password: "",
+    studentID: "",
     countryOfResidence: "",
     school: "",
     major: "",
     classification: "",
     anticipatedGraduationYear: 0,
     currentLevelOfStudy: "none", // Add this to the form (Review)
-    gender: "none", // Add this to the form
+    gender: "none", // Add this to the form (Review)
     hackathonsAttended: 0,
     technicalSkills: [] as string[],
     dietaryRestrictions: [] as string[],
+    allergiesOrRestrictions: "",
     hasTeam: false, // Add this to the form
     heardAboutGuadalahacks: "none",  // Add this to the form
     shirtSize: "none", // Add this only if we have money for shirts :c
@@ -246,6 +248,17 @@ export default function RegistrationForm() {
                       />
                     </div>
                     <div>
+                      <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepOneStudentID", language)}</label>
+                      <input
+                        type="text"
+                        name="studentID"
+                        value={formData.studentID}
+                        onChange={handleInputChange}
+                        className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-[#E31C79] focus:outline-none focus:ring-1 focus:ring-[#E31C79]"
+                        required
+                      />
+                    </div>
+                    <div>
                       <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepOnePassword", language)}</label>
                       <input
                         type="password"
@@ -443,6 +456,16 @@ export default function RegistrationForm() {
                           </label>
                         ))}
                       </div>
+                      {formData.dietaryRestrictions.includes("Other") && (
+                        <input
+                          type="text"
+                          name="allergiesOrRestrictions"
+                          value={formData.allergiesOrRestrictions}
+                          onChange={handleInputChange}
+                          placeholder={getLocalizedString("stepFourDietaryRestrictionsDescription", language)}
+                          className="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-[#E31C79] focus:outline-none focus:ring-1 focus:ring-[#E31C79]"
+                        />
+                        )}
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepFourResume", language)}</label>

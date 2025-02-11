@@ -47,6 +47,7 @@ const validateRegistration = [
     body('emergencyContactRelationship').notEmpty().withMessage('Emergency contact relationship is required'),
     body('emergencyContactPhoneNumber').notEmpty().withMessage('Emergency contact phone number is required'),
     body('emergencyContactEmail').isEmail().withMessage('Emergency contact email must be a valid email'),
+    body('studentID').notEmpty().withMessage('Student ID is required'),
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

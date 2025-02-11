@@ -19,8 +19,9 @@ model RegistrationForm {
   lastName                    String
   age                         Int
   phoneNumber                 String
-  email                       String
+  email                       String   @unique
   password                    String
+  studentID                   String   @unique
   countryOfResidence          String
   school                      String
   major                       String
@@ -31,6 +32,7 @@ model RegistrationForm {
   hackathonsAttended          Int
   technicalSkills             String[]
   dietaryRestrictions         String[]
+  allergiesOrRestrictions     String?
   hasTeam                     Boolean
   heardAboutGuadalahacks      String
   shirtSize                   String

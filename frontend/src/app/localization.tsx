@@ -1,3 +1,4 @@
+import { s } from 'framer-motion/client';
 import { StringLocalization, ElementLocalization } from './locale';
 
 export const stringLocalization: StringLocalization = {
@@ -39,6 +40,11 @@ export const stringLocalization: StringLocalization = {
     stepOneEmail: {
         es: "Correo electrónico",
         en: "Email"
+    },
+
+    stepOneStudentID: {
+        es: "Matrícula",
+        en: "Student ID"
     },
 
     stepOnePassword: {
@@ -109,6 +115,11 @@ export const stringLocalization: StringLocalization = {
     stepFourDietaryRestrictions: {
         es: "Restricciones alimenticias",
         en: "Dietary restrictions"
+    },
+
+    stepFourDietaryRestrictionsDescription: {
+        es: "Especifica",
+        en: "Specify"
     },
 
     stepFourResume: {

@@ -7,6 +7,7 @@ CREATE TABLE "registration_form" (
     "phoneNumber" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
+    "studentID" TEXT NOT NULL,
     "countryOfResidence" TEXT NOT NULL,
     "school" TEXT NOT NULL,
     "major" TEXT NOT NULL,
@@ -17,6 +18,7 @@ CREATE TABLE "registration_form" (
     "hackathonsAttended" INTEGER NOT NULL,
     "technicalSkills" TEXT[],
     "dietaryRestrictions" TEXT[],
+    "allergiesOrRestrictions" TEXT,
     "hasTeam" BOOLEAN NOT NULL,
     "heardAboutGuadalahacks" TEXT NOT NULL,
     "shirtSize" TEXT NOT NULL,
@@ -32,3 +34,9 @@ CREATE TABLE "registration_form" (
 
     CONSTRAINT "registration_form_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "registration_form_email_key" ON "registration_form"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "registration_form_studentID_key" ON "registration_form"("studentID");
