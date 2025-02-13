@@ -190,6 +190,11 @@ export const stringLocalization: StringLocalization = {
         es: "Paso",
         en: "Step"
     },
+
+    completeAllFields: {
+        es: "Por favor completa correctamente todos los campos",
+        en: "Please complete all fields correctly"
+    },
 }
 
 export const elementLocalization: ElementLocalization = {

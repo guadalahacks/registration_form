@@ -80,7 +80,30 @@ export default function RegistrationForm() {
     }
   };
 
-  const nextStep = () => setStep((prev) => Math.min(prev + 1, totalSteps))
+  const validateStep = () => {
+    switch (step) {
+      case 1:
+        return formData.firstName && formData.lastName && (formData.age > 0) && formData.phoneNumber && formData.countryOfResidence && formData.email && (formData.studentID.startsWith('A') || formData.studentID.startsWith('a')) && (formData.password.length >= 8);
+      case 2:
+        return formData.school && formData.major && formData.classification && formData.anticipatedGraduationYear;
+      case 3:
+        return formData.technicalSkills.length > 0;
+      case 4:
+        return formData.additionalLinks && formData.resume;
+      case 5:
+        return formData.emergencyContactName && formData.emergencyContactRelationship && formData.emergencyContactPhoneNumber && formData.emergencyContactEmail;
+      default:
+        return false;
+    }
+  };
+
+  const nextStep = () => {
+    if (validateStep()) {
+      setStep((prev) => Math.min(prev + 1, totalSteps));
+    } else {
+      alert(getLocalizedString("completeAllFields", language));
+    }
+  };
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1))
 
   const handleSubmit = async (e: React.FormEvent) => {
