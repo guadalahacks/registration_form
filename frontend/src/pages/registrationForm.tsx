@@ -569,6 +569,23 @@ export default function RegistrationForm() {
                       </div>
                     </div>
 
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepFiveShirtSize", language)}</label>
+                      <select
+                      name="shirtSize"
+                      value={formData.shirtSize}
+                      onChange={handleInputChange}
+                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-[#E31C79] focus:outline-none focus:ring-1 focus:ring-[#E31C79]"
+                      >
+                      <option value="none">{getLocalizedString("stepFiveShirtSizeSelect", language)}</option>
+                      <option value="S">S</option>
+                      <option value="M">M</option>
+                      <option value="L">L</option>
+                      <option value="XL">XL</option>
+                      <option value="XXL">XXL</option>
+                      </select>
+                    </div>
+
                     <motion.div {...fadeInUp} transition={{ delay: 0.5 }}>
                       <label className="block text-sm font-medium text-gray-700">{getLocalizedString("stepFiveAdditionalInformation", language)}</label>
                       <textarea

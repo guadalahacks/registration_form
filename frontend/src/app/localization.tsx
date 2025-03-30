@@ -161,6 +161,11 @@ export const stringLocalization: StringLocalization = {
         en: "Email"
     },
 
+    stepFiveShirtSize: {
+        es: "Talla de camiseta",
+        en: "Shirt size"
+    },
+
     stepFiveAdditionalInformation: {
         es: "Información adicional",
         en: "Additional information"
